@@ -1,0 +1,185 @@
+\documentclass[12pt]{gradescopeexam}
+% \documentclass[12pt,noanswers,solutionkey]{gradescopeexam}
+\noprintanswers
+% \printanswers
+% \printsolutionkey
+
+
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{datetime}
+\usepackage{hyperref}
+\usepackage{comment}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{units}
+
+\renewcommand\P{\mathbb{P}}
+\newcommand\R{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\E{\mathbb{E}}
+\newcommand\one{\mathbbm{1}}
+\newcommand\V{\mathrm{var}}
+\renewcommand\vec[1]{\mathbf{#1}}
+\renewcommand\c[1]{\mathcal{#1}}
+
+\begin{document}
+
+% ----------------------------------------------------------------
+\LeftBoxMargin{0.0\linewidth}
+\RightBoxMargin{0.0\linewidth}
+\AssignmentTitle{Week2-template}
+\CourseName{Math 563, Fall 2022}
+% \FirstName{Marek}
+% \LastName{Rychlik}
+% \StudentId{31415926}
+% ----------------------------------------------------------------
+\makeheader
+\vspace{0.1in}
+\begin{questions}
+  \begin{question}
+    (Durrett 1.2.1) Suppose $X$ and $Y$ are random variables on
+    $(\Omega, \c{F}, \P )$ and let $A \in \c{F}$.  Show that if we let
+    $Z(\omega) = X(\omega)$ for $\omega \in A$ and
+    $Z(\omega) = Y (\omega)$ for $\omega \in A^c$ , then $Z$ is a random
+    variable.
+    \begin{parts}
+      \part Complete the equation by replacing $\square$ with the correct formula:
+      \[ Z^{-1}(B) = \left(A\cap(\square)\right) \cup \left(A^c\cap (\square) \right)\]
+      \begin{solutionorbox}[1.5in]
+      \end{solutionorbox}
+      \part Complete the proof.
+      \begin{prooforbox}[3in]
+
+      \end{prooforbox}
+    \end{parts}
+  \end{question}
+
+  \begin{question}
+    (Durrett 1.2.2) Let $\chi$ have the standard normal
+    distribution. Use Theorem 1.2.6 to get upper and lower bounds on
+    $\P (\chi \ge 4)$.
+    \begin{parts}
+      \part What is the upper bound?
+      \begin{solutionorbox}[3in]
+
+      \end{solutionorbox}
+      \part What is the lower bound?
+      \begin{solutionorbox}[3in]
+
+      \end{solutionorbox}
+    \end{parts}
+  \end{question}
+
+  \begin{question}
+    (Durrett 1.2.3)
+    Show that a distribution function has at most countably many
+    discontinuities.
+    \begin{prooforbox}[6in]
+
+    \end{prooforbox}
+  \end{question}
+  \begin{question}
+    (Durrett 1.2.4) Show that if $F (x) = \P (X \le x)$ is continuous
+    then $Y = F (X)$ has a uniform distribution on $(0,1)$, that is,
+    if $y \in [0, 1]$, $P (Y \le y) = y$.
+    \begin{parts}
+      \part Prove the conclusion with an additional assumption that
+      $F$ is strictly increasing.
+      \begin{prooforbox}[3in]
+
+      \end{prooforbox}
+      \part Carry out the proof (without this additional assumption).
+      \begin{prooforbox}[3.5in]
+
+      \end{prooforbox}
+    \end{parts}
+  \end{question}
+
+  \begin{question}
+    (Durrett 1.2.5) Suppose $X$ has continuous density $f$ ,
+    $\P (\alpha \le X \le \beta) = 1$ and $g$ is a function that is
+    strictly increasing and differentiable on $(\alpha, \beta$).  Then
+    \begin{parts}
+      \part $g(X)$ has density $f (g^{-1}(y))/g'(g^{-1} (y))$ for
+      $y \in (g(\alpha), g(\beta))$ and $0$ otherwise.
+      \begin{prooforbox}[3.5in]
+        
+      \end{prooforbox}
+      \part When $g(x) = ax + b$ with $a > 0$,
+      $g^{-1} (y) = (y - b)/a$ so the answer is $(1/a)f ((y - b)/a)$.
+      \begin{prooforbox}[3in]
+
+      \end{prooforbox}
+    \end{parts}
+  \end{question}
+
+  \begin{question}
+    (Durrett 1.2.6) Suppose $X$ has a normal distribution. Use the
+    previous exercise to compute the density of $\exp(X)$. (The answer
+    is called the lognormal distribution.)
+    \begin{prooforbox}[7.5in]
+
+    \end{prooforbox}
+  \end{question}
+  \begin{question}
+    (Durrett 1.2.7)
+    \begin{parts}
+      \part (i) Suppose $X$ has density function $f$.  Compute
+      the distribution function of $X^2$ and then differentiate to find
+      its density function.
+      \begin{prooforbox}[3in]
+
+      \end{prooforbox}
+      \part (ii) Work out the answer when $X$ has a standard normal
+      distribution to find the density of the chi-square distribution.
+      \begin{prooforbox}[3in]
+
+      \end{prooforbox}
+    \end{parts}
+  \end{question}
+
+  \begin{question} (Custom Problem, generalizes Durrett 1.2.5) Suppose
+    $X$ has continuous, density $f$ , and $g$ is a continuously
+    differentiable function (not necessarily increasing) such that
+    that the set $$\{y\in\R: g'(y) = 0\}$$ has Lebesgue measure
+    zero.
+
+    \begin{parts}
+      \part 
+      Let $Y=g(X)$. Prove that $Y$ has density $h$ given by the equation
+      \[ h(x) = \sum_{y\in g^{-1}(x)} \frac{f(y)}{|g'(y)|}. \] 
+      \begin{prooforbox}[6in]
+
+      \end{prooforbox}
+      \part Let $g:(0,1]\to(0,1]$ be the \emph{fractional part} of $x$, i.e.
+      function defined by
+      \[ g(x) = \frac{1}{x} -\left\lfloor \frac{1}{x}\right\rfloor \]
+      Let $X$ be a continuous random variable whose distribution has
+      probability density function (pdf):
+      \[ f(x) =
+        \begin{cases}
+          \frac{1}{\pi}\frac{1}{1+x}, & 0 \le x \le 1,\\
+          0 \quad\text{otherwise.}
+        \end{cases}
+      \]
+      Prove that $Y=g(X)$ is also a continuous variable with the same pdf $f$.
+      \begin{prooforbox}[6in]
+
+      \end{prooforbox}
+    \end{parts}
+  \end{question}
+\end{questions}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-engine: default
+%%% End:
