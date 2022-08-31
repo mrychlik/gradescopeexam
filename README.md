@@ -26,6 +26,8 @@ Output modes
 For students preparing solutions from templates in LaTeX form provided by the instructor
 ========================================================================================
 
+- Obtain a copy of the template from the instructor in LaTeX format. Samples are in the
+  folder [math563](./math563 "Math 563")
 - You should make sure that your solutions are contained in the boxes in the blank exam.
 - If your solution is too long to fit, you should make sure not to insert an extra page
   before the next problem. Rather, you may add a page past the last page of the exam
