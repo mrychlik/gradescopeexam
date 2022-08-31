@@ -36,6 +36,13 @@ For students preparing solutions from templates in LaTeX form provided by the in
 - Use the '\printanswers' option to produce a version ready for Gradescope submission.
 - You may need to force page breaks by using '\newpage' to match the page count with the blank exam.
 
+For instructors
+===============
+To use our class, download the file
+[gradescopeexam.cls](./latex/gradescopeexam.cls "gradescopeexam.cls")
+and put it in a folder where LaTeX will find it (the director where
+the exam lives is OK, but perhaps you want to put it in a central
+location, so you do not have to reuse it for all exams).
 
 Enjoy,
 
