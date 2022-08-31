@@ -44,6 +44,10 @@ and put it in a folder where LaTeX will find it (the director where
 the exam lives is OK, but perhaps you want to put it in a central
 location, so you do not have to reuse it for all exams).
 
+Then follow the examples provided ([samples](./samples "samples")
+folder).  A complete example of a real homework assignment is in the
+folder [samples/math468/Week9](./samples/math468/Week9).
+
 Enjoy,
 
 --Marek Rychlik
