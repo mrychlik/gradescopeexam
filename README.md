@@ -35,3 +35,5 @@ For students preparing solutions from templates in LaTeX form provided by the in
 - You may need to force page breaks by using '\newpage' to match the page count with the blank exam.
 
 
+Enjoy,
+--Marek Rychlik
