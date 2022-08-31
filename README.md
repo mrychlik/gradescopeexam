@@ -36,4 +36,5 @@ For students preparing solutions from templates in LaTeX form provided by the in
 
 
 Enjoy,
+
 --Marek Rychlik
