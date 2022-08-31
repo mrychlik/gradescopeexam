@@ -1,0 +1,276 @@
+\documentclass[12pt]{gradescopeexam}
+% \documentclass[12pt,noanswers,solutionkey]{gradescopeexam}
+\noprintanswers
+%\printanswers
+%\printsolutionkey
+
+
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{datetime}
+\usepackage{hyperref}
+\usepackage{comment}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{units}
+\usepackage{MnSymbol}
+
+\renewcommand\P{\mathbb{P}}
+\newcommand\R{\mathbb{R}}
+\newcommand\N{\mathbb{N}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\E{\mathbb{E}}
+\newcommand\one{\mathbbm{1}}
+\newcommand\V{\mathrm{var}}
+\newcommand\cF{\mathcal{F}}     %sigma-algebra
+\newcommand\cS{\mathcal{S}}     %for space of intervals
+\newcommand\cR{\mathcal{R}}     %for Borel subsets.
+\newcommand\cC{\mathcal{C}}     %for Borel subsets.
+\newcommand\cA{\mathcal{A}}     %for Borel subsets.
+\renewcommand\vec[1]{\mathbf{#1}}
+
+\begin{document}
+
+% ----------------------------------------------------------------
+\LeftBoxMargin{0.0\linewidth}
+\RightBoxMargin{0.0\linewidth}
+\AssignmentTitle{Week1-template}
+\CourseName{Math 563, Fall 2022}
+%\FirstName{Marek}
+%\LastName{Rychlik}
+%\StudentId{31415926}
+% ----------------------------------------------------------------
+\makeheader
+\vspace{0.1in}
+\begin{questions}
+  \begin{question} (Analysis, Set Theory Review)
+    \begin{parts}
+      \part Carefully state the \textbf{Axiom of Choice}. Use proper notation,
+      consistent with the book.
+      \begin{solutionorbox}[6in]
+        
+      \end{solutionorbox}
+      \newpage
+      \part 
+      Let $x_i$, $i\in I$, be an uncountable family of positive real numbers.
+      Let $|J|$ denote the cardinality of a subset $J\subseteq I$.
+      Prove that
+      $$\sup_{J\subset I,\; |J|<\infty} \sum_{i\in J} x_i = \infty.$$
+      Make sure to show the step which relies upon the Axiom of Choice.
+      \begin{prooforbox}[6in]
+        Let $I_n = \{i\in I: x_i\ge 1/n\}$, $n=1,2,\ldots$. Clearly $I=\bigcup_{n=1}^\infty I_n$
+        and $I_{n+1}\supseteq I_n$ for every $n\in\N$.
+        Let us assume that, to the contrary,
+        $$M :=\sup_{J\subset I,\; |J|<\infty} \sum_{i\in J} x_i < \infty.$$
+        We claim that $I_n$  is finite and $|I_n| < M\cdot n$. Else, $I_n$ would have a
+        finite subset $F$ such that $|F| > M\cdot n$ and $\sum_{i\in F} x_i > M\cdot n\frac{1}{n} = M$,
+        which contradicts the definition of $M$. We need two facts that seem obvious:
+        \begin{enumerate}
+        \item An infinite set has a finite subset of any finite cardinality.
+        \item A union of countably many finite subsets is countable.
+        \end{enumerate}
+        A set $J\subseteq I$ is infinite if for every natural number $n$
+        there is a 1:1 (but not onto) function $f:J\to\{1,2,\ldots,n\}$, according to the theory
+        of cardinality. So 1. holds basically by definition.
+
+        The proof of 2. relies upon the Axiom of Choice, albeit a weakened version, see:
+        \url{https://proofwiki.org/wiki/Countable_Union_of_Finite_Sets_is_Countable}.
+      \end{prooforbox}
+    \end{parts}
+  \end{question}
+
+  \newpage
+  \begin{question} (Durrett, Problem 1.1.1)
+    Let $\Omega=\R$, $\cF =$  all subsets so that $A$ or $A^c$ is countable,
+    $\P(A)=0$ in the first case and $=1$ in the second. Show that $(\Omega,\cF,\P)$
+    is a probability space.
+    \begin{parts}
+      \part Which are the \textbf{axioms} of a $\sigma$-algebra? (When in doubt, follow the book.)
+      \begin{choices}
+        \CorrectChoice closed under complement
+        \choice closed under finite intersection
+        \CorrectChoice closed under countable union
+        \choice contains empty set $\emptyset$
+        \choice contains $\Omega$
+        \choice contains all subsets of $\Omega$        
+      \end{choices}
+      \newpage
+      \part Prove that $\cF$ is a $\sigma$-algebra.
+      \begin{prooforbox}[6in]
+        The first observation is that $\cF$ is closed under
+        complement. Proof considers two cases: (i) if $A$ is countable
+        then $A^c$ has a countable complement as $(A^c)^c=A$, and thus
+        $A^c\in\cF$ (ii) if $A$ has a countable complement then $A^c$
+        is countable and thus is in $\cF$.
+
+        The fact that $\cF$ is closed under countable union is more involved. First, every
+        such union can be written as
+        \[ \bigcup_{i\in I_1} A_i \cup \bigcup_{i\in I_2} A_i^c \]
+        where $A_i$ is countable for all $i\in I_1\cupdot I_2$ and
+        where $I_1$ and $I_2$ are countable.  (By reordering the sets
+        in the union.) The first union is a countable set and the second set is by de Morgan:
+        \[ \bigcup_{i\in I_2} A_i^c  = \left(\bigcap_{i\in I_2} A_i\right)^c \]
+        which is a complement of a countable set, with one exception: when $I_2$ is empty, the
+        second union is $\emptyset$, in which case the entire union is a countable set.
+        Otherwise, the union can be written as
+        $ B \cup C^c = (B^c\cap C)^c$ where $B$ and $C$ are countable. The set $B^c\cap C$ is
+        countable, and thus $ B \cup C^c$ has countable complement.
+        In all cases the result is either a countable set or a complement of a countable set,
+        thus in $\cF$.
+      \end{prooforbox}
+      \newpage
+      \part Which are \textbf{properties} (including the axioms) of $\P$, a general probability measure? (When in doubt, follow the book.)
+      \begin{choices}
+        \choice The domain of $\P$ is $2^\Omega$.
+        \CorrectChoice The domain of $\P$ is $\cF$.
+        \choice $\P(A\cup B) = \P(A)+\P(B)$ for $A,B\in\cF$.
+        \choice $\P(A^c)=\P(A)$
+        \CorrectChoice $\P(A^c)=1-\P(A)$        
+        \CorrectChoice $\P(\emptyset) = 0$.
+        \choice If $\P(A)=0$ then $A=\emptyset$.
+        \CorrectChoice If $A\subseteq B$ then $\P(A) \le \P(B)$ for $A,B\in\cF$.
+      \end{choices}
+      \newpage
+      \part Prove that $\P$ defined in 1.1.1 is a probability measure.
+      \begin{prooforbox}[6in]
+        We need to show that $\P$ is countably additive, as $\P(\Omega)=1$ is obvious and
+        the observation that $\P(A)\in\{0,1\}$ takes care of the rest. Thus, we need to show:
+        \begin{equation}
+          \label{eqn:countable-additivity}
+          \P\left(\bigcupdot_{i\in I} A_i\right)=\sum_{i\in I}\P\left(A_i\right)
+        \end{equation}
+        We consider two cases:
+        \begin{enumerate}
+        \item If all sets in the countable union are countable, so is the union, for which $\P$ yields
+          $0$. So, in this case countable additivity holds (reduces to $0=0$).
+        \item If one of the sets in the countable union has countable complement then
+          the entire union has a countable complement (this was already observed when
+          proving that $\cF$ is a $\sigma$-algebra). We also observe that if the
+          countable union is a disjoint union than at most one of the sets has a countable
+          complement, as two sets of this kind must intersect. Therefore the equation
+          becomes $1=1$ in this case, i.e., it also holds.
+        \end{enumerate}
+      \end{prooforbox}
+    \end{parts}
+  \end{question}
+  \begin{question}
+    (Durret 1.1.2)
+    Let $\cS_d=$ the empty set plus all
+    sets of the form
+    $$(a_1,b_1]\times\ldots(a_d,b_d]\subset \R^d$$
+    where $-\infty \le a_i < b_i\le\infty$.
+    Show that $\sigma(\cS_d) = \cR^d$, the Borel subsets of $\R^d$.
+    \begin{prooforbox}[7in]
+      The $\sigma$-algebra $\cR^d$ is by definition generated by open subsets of $\R^d$. As every element of $S_d$ is either empty (thus open) or  a countable intersetion of open sets of the form
+      $$(a_1,b_1)\times\ldots(a_d,b_d)\subset \R^d$$
+      we have $\cS_d\subseteq \cR^d$.
+      To prove the opposite, we need to demonstrate that all open sets are in $\sigma(\cS_d)$.
+      As every open set is a union of counably many of Cartesian products of open intervals,
+      $$(a_1,b_1)\times\ldots(a_d,b_d)\subset \R^d$$
+      and every such set is a countable union of elements of $\cS_d$, all open
+      sets are in $\sigma(\cS_d)$. This concludes the proof.
+    \end{prooforbox}
+  \end{question}
+  \begin{question}
+    (Durret 1.1.3)
+    A $\sigma$-field $\cF$ is said to be countably generated if there is a
+    countable collection $\cC \subseteq \cF$ so that $\sigma(\cC) = \cF$. Show that $\cR^d$
+    is countably  generated.
+    \begin{prooforbox}[7.5in]
+      We can modify the definition of $\cS_d$ to only use intervals
+      with rational endpoints, which results in a countabe family. As countable
+      unions and intersections give us all Cartesian products of intervals,
+      $\cR^d$ is countably generated.
+    \end{prooforbox}
+  \end{question}
+  \begin{question}
+    (Durret 1.1.4)
+    \begin{parts}
+      \part (i) Show that if $\cF_1 \subseteq \cF_2 \subseteq \ldots$ are $\sigma$-algebras,
+      then $\bigcup_i\cF_i$ is an algebra.
+      \begin{prooforbox}[7.5in]
+
+      \end{prooforbox}
+      \newpage
+      \part (ii) Give an example to show that $\bigcup_i\cF_i$ need not be a $\sigma$-algebra.
+      \begin{solutionorbox}[7.5in]
+        Let $\Omega$ be at least $3$-element, and let $A,B\subset \Omega$. Let
+        \begin{align*}
+          \cF_1 &= \{\emptyset, A, A^c,\Omega \},\\
+          \cF_2 &= \{\emptyset, B, B^c,\Omega \}.
+        \end{align*}
+        Let $\cF = \cF_1\cup \cF_2$. Then most of the time $\cF$ is not a $\sigma$-algebra.
+        Indeed, in most examples the subsets
+        $A\cap B, A^c\cap B, A\cap B^c, A^c\cap B^c$ form a partition of $\Omega$ into
+        non-empty sets. Any subfamily of this family, $2^4=16$ subsets altogether, form
+        $\sigma(\{A,B\})$, which has more elements than $\cF$ (only 8). Hence $\cF$ is
+        not a $\sigma$-algebra.
+      \end{solutionorbox}
+    \end{parts}
+  \end{question}
+  
+  \begin{question}
+    (Durrett 1.1.5) A set $A \subseteq \{1, 2, \ldots\}$ is said to
+    have asymptotic density $\theta$ if
+    $$\lim_{n\to\infty} |A \cap \{1, 2, \ldots , n\}|/n = \theta$$
+    Let $\cA$ be the collection of sets for which the asymptotic density exists.
+    \begin{parts}
+      \part Is $\cA$ a $\sigma$-algebra?
+      \begin{choices}
+        \choice Yes
+        \CorrectChoice No
+      \end{choices}
+      \part   an algebra?
+      \begin{choices}
+        \choice Yes
+        \CorrectChoice No
+      \end{choices}
+      \newpage
+      \part Justify the answers in previous parts.
+      \begin{prooforbox}[7.5in]
+        It suffices to give a counterexample to
+        show that $\cA$ is not an algebra.
+        The strategy is to design sets $A$ and
+        $B$ such that $A,B\in\cA$  and
+        $A\cap B\notin\cA$.
+
+        The set $A$ will be a simple arithmetic
+        sequence, e.g.,
+        $$A=\{5\,n\,:\,n\in\N\}.$$
+        The sequence $B$ will be a modificaion of
+        $A$. $B=\{5\,n+\epsilon_n\,:\, n\in\N\}$ where
+        $\epsilon_n\in\{0,1\}$. More precisely
+        \[\epsilon_n =
+          \begin{cases}
+            0,&c_{2k}\le n<c_{2k+1},\\
+            1,&c_{2k+1}\le n<c_{2k+2}.
+          \end{cases}
+        \]
+        for $k=0,1,2,\ldots$, where $c_s$ is a suitably chosen sequence. In fact,
+        it suffices to choose $c_s$ so that
+        \[ c_{s+1} \ge 100 c_s. \]
+        It is clear that both $A$ and $B$ have
+        natural density of $1/5$. The two sets intersect exactly when for some $k\in\N$
+        for $c_{2k} \le n < c_{2k+1}$. Therefore, if $C=A\cap B$,
+        \[ \frac{C\cap [0,c_{2k+1})}{c_{2k+1}} \ge \frac{c_{2k+1}-c_{2k}}{c_{2k+1}}
+          \ge 1-\frac{c_{2k}}{c_{2k+1}} \ge 1-\frac{1}{100} = 0.99. \]
+        On the other hand,
+        \[ \frac{C\cap [0,c_{2k+2})}{c_{2k+2}} \le \frac{c_{2k+1}}{c_{2k+2}}
+          \le \frac{c_{2k+1}}{c_{2k+2}} \le \frac{1}{100} = 0.01. \]
+        Therefore, 
+        \begin{align*}
+          \limsup_{n\to\infty}\frac{|C\cap \{1,2,\ldots,n\}|}{n}&\ge 0.99\frac{1}{5},\\
+          \liminf_{n\to\infty}\frac{|C\cap \{1,2,\ldots,n\}|}{n}&\le 0.01\frac{1}{5}.
+        \end{align*}
+        Therefore, $C\notin\cA$. The proof is complete.
+      \end{prooforbox}
+    \end{parts}
+  \end{question}
+\end{questions}
+\end{document}
