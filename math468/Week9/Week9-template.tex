@@ -1,0 +1,237 @@
+\documentclass[12pt]{gradescopeexam}
+% \documentclass[12pt,noanswers,solutionkey]{gradescopeexam}
+\noprintanswers
+%\printanswers
+\printsolutionkey
+
+
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{datetime}
+\usepackage{hyperref}
+\usepackage{comment}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{units}
+
+\renewcommand\P{\mathbb{P}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\E{\mathbb{E}}
+\newcommand\one{\mathbbm{1}}
+\newcommand\V{\mathrm{var}}
+\renewcommand\vec[1]{\mathbf{#1}}
+
+\begin{document}
+
+% ----------------------------------------------------------------
+\LeftBoxMargin{0.0\linewidth}
+\RightBoxMargin{0.0\linewidth}
+\AssignmentTitle{Week9-template}
+\CourseName{Math 468, Spring 2022}
+\FirstName{Marek}
+\LastName{Rychlik}
+\StudentId{31415926}
+% ----------------------------------------------------------------
+\makeheader
+\vspace{0.1in}
+\begin{questions}
+  \begin{question} (Durrett, Problem 4.1)
+    A salesman flies around between Atlanta, Boston, and Chicago as the following rates (the units are trips per month):
+    \begin{center}
+      \begin{tabular}{|c|ccc|}
+        \hline
+        F\ T  & A & B & C\\
+        \hline
+        A &-4 & 2 & 2\\
+        B & 3 &-4 & 1\\
+        C & 5 & 0 &-5\\
+        \hline
+      \end{tabular}
+    \end{center}
+
+    \begin{parts}
+      \part What is the transition rate matrix $\vec{Q}$ for this process?
+      \begin{solutionorbox}[1.2in]
+        \TheAnswer{
+          \[ \vec{Q} =
+            \begin{bmatrix}
+              -4 &2 &2\\
+              3 &-4 &1\\
+              5 &0  &-5
+            \end{bmatrix}
+          \]
+        }
+      \end{solutionorbox}
+
+      \part List the eigenvalues of $\vec{Q}$ as a comma-separated list.
+      \begin{solutionorbox}[3.5in]
+        \TheAnswer{$$-5,-8,0$$}
+      \end{solutionorbox}
+
+      \part Find the (right) diagonalizing matrix $\vec{S}$ of $\vec{Q}$, so
+      that $\vec{S}^{-1}\vec{Q}\vec{S}$ is diagonal. Scale the columns so that
+      the first entry in each column (counting from the top) is 1.
+      \begin{solutionorbox}[3.5in]
+        \TheAnswer{
+          $$\vec{S}=
+          \begin{bmatrix}
+            0&1&1\\
+            1&-{{1}\over{3}}&1\cr -1&-{{5}\over{3}}&1\\
+          \end{bmatrix}
+          $$}
+      \end{solutionorbox}
+      \part Find the left diagonalizing matrix $\vec{L}=\vec{S}^{-1}$ of $\vec{Q}$,
+      so that $\vec{L}\vec{Q}\vec{L}^{-1}$ is diagonal.
+      \begin{solutionorbox}[3.5in]
+        \TheAnswer{
+          $$\begin{bmatrix}
+              -{{1}\over{3}}&{{2}\over{3}}&-{{1}\over{3}}\\
+              {{1}\over{2}}&-{{1}\over{4}}&-{{1}\over{4}}\\
+              {{1}\over{2}}&{{1}\over{4}}&{{1}\over{4}}
+            \end{bmatrix}$$}
+        \end{solutionorbox}
+        \part What is the stationary distribution $\pi$ for this Markov process?
+        {\color{magenta}Hint: Use one of the rows of the matrix found in the previous part.
+          Make sure it is a row vector.}
+        \begin{solutionorbox}[1.4in]    
+          \TheAnswer{
+            $$\pi=
+            \begin{bmatrix}
+              {{1}\over{2}}&{{1}\over{4}}&{{1}\over{4}}
+            \end{bmatrix}$$
+          }
+        \end{solutionorbox}      
+        \part (Durrett 4.1, part (a)) Find the limiting fraction of time she spends in each city.
+        {\color{magenta} Only the exact answer yields credit. List the numbers in the order ``A, B, C''.}
+        \begin{solutionorbox}[2in]
+          \TheAnswer{$$1/2,1/4,1/4$$} 
+        \end{solutionorbox}
+        \part Find the routing matrix $\vec{R}$ for $\vec{Q}$.
+        \begin{solutionorbox}[2.4in]
+          \TheAnswer{$$\vec{R} =
+            \begin{bmatrix}
+              0 &1/2 &1/2\\
+              3/4 &0 &1/4\\
+              1 &0  &0
+            \end{bmatrix}
+            $$}
+        \end{solutionorbox}
+        \part If she is in Boston now, what is the probability that the first city she will visit next
+        is Chicago?
+        \begin{solutionorbox}[1.2in]
+          \TheAnswer{$$\P(Y_1=C|Y_0=B)=\vec{R}_{23} = 1/4$$}
+        \end{solutionorbox}
+        \part (Durrett 4.1, part (b)) What is her average number of trips each year from Boston to Atlanta?
+        \begin{solutionorbox}[6in]
+          Once she is in Boston, she will visit Atlanta next according
+          to the routing matrix $\vec{R}$, namely $\vec{R}_{21}=3/4$ of
+          the times.  Hence, the answer is $3/4$ of the average number
+          of visits to Boston per year.  As the fraction of time spend
+          in Boston is $1/4$ of the time, and the rate of staying in
+          Boston is $4$, the everage stay in Boston is $1/4$ (of a
+          month).  Therefore, to stay $1/4$ of 1 year, which is $3$
+          months spent in Boston each year, we must visit Boston $12$
+          times a year. Clearly, $3/4$ of those visits is $9$ (trips to Atlanta).
+          \TheAnswer{$$9$$}
+        \end{solutionorbox}
+        \part Find the matrix $\vec{P}(t)=e^{t\,\vec{Q}}$.
+        \begin{solutionorbox}[7.8in]
+          As we know, $\vec{Q}$ is diagonalizable and we know its diagonalizing matrix
+          $$\vec{S}=
+          \begin{bmatrix}
+            0&1&1\\
+            1&-{{1}\over{3}}&1\cr -1&-{{5}\over{3}}&1\\
+          \end{bmatrix}
+          $$
+          and its inverse
+          $$
+          \vec{L}=
+          \begin{bmatrix}
+            -{{1}\over{3}}&{{2}\over{3}}&-{{1}\over{3}}\\
+            {{1}\over{2}}&-{{1}\over{4}}&-{{1}\over{4}}\\
+            {{1}\over{2}}&{{1}\over{4}}&{{1}\over{4}}
+          \end{bmatrix}.
+          $$
+          Also, the diagonal form is
+          $$
+          \vec{D}=
+          \begin{bmatrix}
+            -5 &0 &0\\
+            0 &-8 &0\\
+            0 &0 &0\\
+          \end{bmatrix}.
+          $$
+          Therefore,
+          $$
+          e^{t\,\vec{Q}}= \vec{S}e^{t\,\vec{D}}\vec{S}^{-1} =\vec{S}e^{t\,\vec{D}}\vec{L}.
+          $$
+          Hence the answer is:
+          \begin{align*}
+            e^{t\,\vec{Q}}
+            &=
+              \begin{bmatrix}
+                0&1&1\\
+                1&-\frac{1}{3}&1\\
+                -1&-\frac{5}{3}&1\\
+              \end{bmatrix}
+            \begin{bmatrix}
+              e^{-5t} &0 &0\\
+              0 &e^{-8t} &0\\
+              0 &0 &1\\
+            \end{bmatrix}
+            \begin{bmatrix}
+              -\frac{1}{3} &\frac{2}{3} & -\frac{1}{3}\\
+              \frac{1}{2}  &-\frac{1}{4}&-\frac{1}{4}\\
+              \frac{1}{2}  &\frac{1}{4} &\frac{1}{4}
+            \end{bmatrix}\\
+            &=
+              \begin{bmatrix}
+                0&1&1\\
+                1&-\frac{1}{3}&1\\
+                -1&-\frac{5}{3}&1\\
+              \end{bmatrix}
+            \begin{bmatrix}
+              -\frac{1}{3}e^{-5t}  &\frac{2}{3}e^{-5t}   & -\frac{1}{3}e^{-5t}\\
+              \frac{1}{2}e^{-8t}   &-\frac{1}{4}e^{-8t}  &-\frac{1}{4}e^{-8t} \\
+              \frac{1}{2}         &\frac{1}{4}         &\frac{1}{4}
+            \end{bmatrix}\\
+            &= \begin{bmatrix}
+                 \frac{1}{2}\,e^{-8t} + \frac{1}{2} & -\frac{1}{4}\,e^{-8t} + \frac{1}{4} & -\frac{1}{4}\,e^{-8t} + \frac{1}{4}\\
+                 -\frac{1}{3}\,e^{-5t} -\frac{1}{6}\,e^{-8t} + \frac{1}{2}  & \frac{2}{3}\,e^{-5t} +\frac{1}{12}\,e^{-8t} + \frac{1}{4}& -\frac{1}{3}\,e^{-5t}       +\frac{1}{12}\,e^{-8t} + \frac{1}{4} \\
+                 \frac{1}{3}\,e^{-5t} -\frac{5}{6}\,e^{-8t} + \frac{1}{2}& -\frac{2}{3}\,e^{-5t} + \frac{5}{12}\,e^{-8t} + \frac{1}{4}& \frac{1}{3}\,e^{-5t} + \frac{5}{12}\,e^{-8t}+ \frac{1}{4}
+               \end{bmatrix}
+          \end{align*}
+          
+          \TheAnswer{
+            \begin{small}
+            $$\begin{bmatrix}{{e^ {- 8
+                \,t }}\over{2}}+{{1}\over{2}}&{{1}\over{4}}-{{e^ {- 8\,t }}\over{4}}&{{1}\over{4}}-{{e^ {- 8\,t }}\over{4}}\\
+                -{{e^ {- 5\,t }}\over{3}}-{{e^ {- 8\,t }}\over{6}}+{{1}\over{2}}&{{2\,e^ {- 5\,t }}\over{3}}+ {{e^ {- 8\,t }}\over{12}}+{{1}\over{4}}&-{{e^ {- 5\,t }}\over{3}}+{{e^ {- 8\,t }}\over{12}}+{{1}\over{4}}\\
+                {{e^ {- 5\,t }}\over{3}}-{{5\,e^ {- 8\,t }}\over{6}}+{{1}\over{2}}&-{{2\,e^ {- 5\,t }}\over{3}}+{{5\,e^ {- 8\,t }}\over{12}}+{{1}\over{4}}&{{e^ {- 5\,t }}\over{3}}+{{5\,e^ {- 8\,t }}\over{12}}+{{1}\over{4}}\\ 
+              \end{bmatrix} $$            
+            \end{small}
+          }
+          \end{solutionorbox}
+        \part If she is in Boston now, what is the probability that 
+        she will be in Atlanta two months from now? {\color{magenta}Your answer must have at least 6 digits of precision.}
+        \begin{solutionorbox}[2in]
+          The answer is $\P(X(2)=A|X(0)=B)=\vec{P}_{21}(2)$ and can be obtained by evaluating the right entry of
+          the matrix from the previous part.
+          \TheAnswer{
+            \begin{align*}
+              \vec{P}_{21}(2) &=-{{e^ {- 5\,t }}\over{3}}-{{e^ {- 8\,t }}\over{6}}+{{1}\over{2}}\big|_{t=2}\\
+                              &=-{{e^ {- 10 }}\over{3}}-{{e^ {- 16 }}\over{6}}+{{1}\over{2}}
+                               \approx 0.4999848479342167
+            \end{align*}
+          }
+        \end{solutionorbox}
+      \end{parts}
+    \end{question}
+  \end{questions}
+\end{document}
