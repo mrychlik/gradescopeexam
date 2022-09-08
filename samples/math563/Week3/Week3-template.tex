@@ -1,0 +1,127 @@
+\documentclass[12pt]{gradescopeexam}
+% \documentclass[12pt,noanswers,solutionkey]{gradescopeexam}
+\noprintanswers
+% \printanswers
+% \printsolutionkey
+
+
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{datetime}
+\usepackage{hyperref}
+\usepackage{comment}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{units}
+\usepackage{MnSymbol}
+
+\renewcommand\P{\mathbb{P}}
+\newcommand\R{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\E{\mathbb{E}}
+\newcommand\one{\mathbbm{1}}
+\newcommand\V{\mathrm{var}}
+\renewcommand\vec[1]{\mathbf{#1}}
+\renewcommand\c[1]{\mathcal{#1}}
+
+
+\begin{document}
+
+% ----------------------------------------------------------------
+\LeftBoxMargin{0.0\linewidth}
+\RightBoxMargin{0.0\linewidth}
+\AssignmentTitle{Week3-template}
+\CourseName{Math 563, Fall 2022}
+% \FirstName{Marek}
+% \LastName{Rychlik}
+% \StudentId{31415926}
+% ----------------------------------------------------------------
+\makeheader
+\vspace{0.1in}
+\begin{questions}
+  \begin{question}
+    (Durrett 1.3.2.) Prove Theorem 1.3.6 when $n = 2$ by checking $\{X_1 +X_2 < x\} \in \c{F}$.
+    \begin{parts}
+      \part Let $X = X_1+ X_2$. Prove that we have a partition
+      \begin{equation}
+        \label{eqn:preimage-decomp}
+        X^{-1}((-\infty,x]) = \bigcupdot_{u\in\R} X_1^{-1}(u) \cap X_2^{-1}((-\infty,x-u]).
+      \end{equation}
+      \begin{prooforbox}[3in]
+      \end{prooforbox}
+      \part Why is the fact in the previous part not sufficient to
+      deduce that $X^{-1}((-\infty,x])\in\c{F}$?
+      \begin{solutionorbox}[2.3in]
+      \end{solutionorbox}
+      \part If $X_1$ is a discrete variable, use the partition in
+      equation~\eqref{eqn:preimage-decomp} to show that $\{X<x\}\in\c{F}$.
+      \begin{prooforbox}[3in]
+      \end{prooforbox}
+      \part Write $X^{-1}((-\infty,x])$ as a triple-nested expression
+      (e.g. countable union of countable intersections of countable unions) like the partition above,
+      which shows by inspection that $\{X<x\}\in\c{F}$.
+      \begin{solutionorbox}[4in]
+      \end{solutionorbox}
+    \end{parts}
+  \end{question}
+
+  \begin{question}
+    (Durrett 1.3.5.) A function $f$ is said to be lower semicontinuous or l.s.c. if
+    \[ \liminf_{y\to x} f (y) \ge f (x) \]
+    and upper semicontinuous (u.s.c.) if $-f$ is l.s.c. Show that $f$ is l.s.c. if
+    and only if $\{x : f (x) \le a\}$ is closed for each $a \in \R$ and conclude that
+    semicontinuous functions are measurable.
+    \begin{prooforbox}[6.5in]
+    \end{prooforbox}
+  \end{question}
+  
+  \begin{question}
+    (Durrett 1.4.4.) Prove the Riemann-Lebesgue lemma. If $g$ is
+    integrable (in the sense of Lebesgue) then
+    \[ \lim_{n\to \infty}   \int_{-\infty}^\infty g(x) \cos n\,x\,dx = 0. \]
+    Hint: If g is a step function, this is easy. Now use the previous exercise (Durrett 1.4.3).
+    NOTE: Use the results of that exercise freely but do not solve it.
+    \begin{prooforbox}[6.5in]
+    \end{prooforbox}
+  \end{question}
+
+  \begin{question}
+    (Durrett 1.5.8.) Show that if f is integrable on $[a, b]$,
+    $g(x) = \int_{[a,x]} f(y)\, dy$ is continuous on $(a, b)$.
+    \begin{prooforbox}[7.5in]
+    \end{prooforbox}
+  \end{question}
+
+  \begin{question}
+    (Durrett 1.6.14.) Let $X \ge 0$ but do NOT assume $\E(1/X) < \infty$. The book defines
+    this notation
+    \[ \E(X; A) = \int_{A} X\,d\P = \E(X\cdot \one_A)\]
+    Show
+    \begin{parts}
+      \part
+      \[ \lim_{y\to\infty} y\,\E(1/X; X > y) = 0,\]
+      \begin{prooforbox}[2.8in]
+      \end{prooforbox}
+      \part 
+      \[\lim_{y\downarrow 0} y\,\E(1/X; X > y) = 0. \]
+      \begin{prooforbox}[2.6in]
+      \end{prooforbox}
+    \end{parts}
+  \end{question}
+  
+
+
+\end{questions}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-engine: default
+%%% End:
