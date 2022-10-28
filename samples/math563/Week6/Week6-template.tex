@@ -1,0 +1,149 @@
+\documentclass[12pt]{gradescopeexam}
+% \documentclass[12pt,noanswers,solutionkey]{gradescopeexam}
+\noprintanswers
+% \printanswers
+% \printsolutionkey
+
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{datetime}
+\usepackage{hyperref}
+\usepackage{comment}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{units}
+\usepackage{MnSymbol}
+\usepackage{pgfplots}
+
+\renewcommand\P{\mathbb{P}}
+\newcommand\R{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\E{\mathbb{E}}
+\newcommand\N{\mathbb{N}}
+\newcommand\F{\mathbb{F}}
+\newcommand\one{\mathbbm{1}}
+\newcommand\V{\mathrm{var}}
+\renewcommand\vec[1]{\mathbf{#1}}
+\renewcommand\c[1]{\mathcal{#1}}
+\newcommand\im[1]{\mathrm{Im}(#1)}
+
+\newtheorem*{lemma}{Lemma}
+
+\begin{document}
+
+% ----------------------------------------------------------------
+\LeftBoxMargin{0.0\linewidth}
+\RightBoxMargin{0.0\linewidth}
+\AssignmentTitle{Week6-template}
+\CourseName{Math 563, Fall 2022}
+% \FirstName{Marek}
+% \LastName{Rychlik}
+% \StudentId{31415926}
+% ----------------------------------------------------------------
+\makeheader
+\vspace{0.1in}
+\begin{questions}
+  \begin{question}
+    (Durrett 3.1.1.)
+    Generalize the proof of Lemma 3.1.1 to conclude that if
+    $\max_{1\le j \le n} |cj,n | \to 0$, $\sum_{}\sum_{j=1}^n c_{j,}\to\lambda$
+    and $\sup_{n}\sum_{j=1}^n|c_{j,n}|<\infty$ then $\prod_{j=1}^n(1+c_{j,n})\to e^{\lambda}$.
+    \begin{prooforbox}[6.5in]
+
+    \end{prooforbox}
+  \end{question}
+
+  \begin{question}
+    (Durrett 3.1.2.)
+    If the $X_i$ have a Poisson distribution with mean 1, then $S_n$ has
+    a Poisson distribution with mean $n$, i.e., $\P(S_n = k) = e^{-n} n^k /k!$.
+    \begin{parts}
+      \part 
+      Use Stirling’s formula to show that if $(k - n)/ n \to x$ then
+      \begin{equation*}
+        \sqrt{2\pi\,n}\, \P (S_n = k) \to \exp(-x^2/2).
+      \end{equation*}
+      \begin{prooforbox}[6.5in]
+
+      \end{prooforbox}
+      \part
+      Use the asymptotic expansion for $\log n!$
+      (\href{https://en.wikipedia.org/wiki/Stirling%27s_approximation}{see
+        \emph{Wikipedia} page} for details):
+      \begin{align*}
+        \ln(k!) - \tfrac{1}{2}\ln k
+        & = \tfrac{1}{2}\ln 1 + \ln 2 + \ln 3 + \cdots + \ln(k-1) + \tfrac{1}{2}\ln k\\
+        & = k \ln k - k + 1 + \sum_{\ell=2}^{\infty} \frac{(-1)^\ell B_\ell}{\ell(\ell-1)} \left( \frac{1}{k^{\ell-1}} - 1 \right) 
+      \end{align*}
+      where  $B_\ell$ is a Bernoulli number, to find the asymptotic expansion of
+      $\P (S_n = k)$ in $n$. Negative powers of $n$ are to be expected. 
+      \begin{solutionorbox}[5.5in]
+      \end{solutionorbox}
+    \end{parts}
+  \end{question}
+
+  \begin{question}
+    (Durrett 3.1.4.)
+    Suppose $\P(X_i = k) = e^{-1} /k!$ for $k = 0, 1, \ldots$. Show that if $a > 1$
+    $$\frac{1}{n}\log\P(S_n \ge n\,a) \to a - 1 - a\,\log a.$$
+    \begin{prooforbox}[6.5 in]
+    \end{prooforbox}
+  \end{question}
+
+
+  \begin{question}
+    (Custom) Use the method of generating functions to calculate the
+    \textbf{the exact} probability that in 6 independent die rolls we get a total score of 15.
+    This problem may seem to involve a lot of computations, but it is not so if the
+    method of generating functions is used efficiently.
+    \begin{parts}
+      \part Write the probability generating function for a single die roll score $X_1$
+      (uniforml probabilty of $1/6$ for die faces $\Omega=\{1,2,\ldots,6\}$
+      \begin{solutionorbox}[3in]
+      \end{solutionorbox}
+      \part Simplify the formula to ratio of polynomials with two terms only. (HINT: Use the
+      formula for the sum of a finite geometric series \[ \sum_{k=0}^n x^k = (1-x^{n+1})/(1-x)
+      =(1-x^{n+1})(1-x)^{-1}.\]
+      \begin{solutionorbox}[2.5in]
+      \end{solutionorbox}
+      \part Write the probability generating function for the sum $S_n=\sum_{j=1}^n X_j$, where
+      each $X_j$ represents the face value of a singl die roll.
+      \begin{solutionorbox}[2in]
+      \end{solutionorbox}
+      \part Use the Cauchy product formula and the binomial expansion for any real $\alpha$:
+      \[ (1+x)^{\alpha} = \sum_{k=1}^\infty {\alpha \choose k} x^k \]
+      where
+      \[ {\alpha\choose k} = \frac{\alpha(\alpha-1)\cdots(\alpha-k+1)}{k!} \]
+      to write down the formula for the probability
+      $P(S_n = k)$. The formula should involve a single summation. Work out the limits.
+      They will involve functions such as $\min$, $\max$, $\lfloor\cdot\rfloor$ and
+      $\lceil \cdot \rceil$. Also, you may find the following identity useful,
+      which allows rewriting binomial coefficients for negative $\alpha$ with a positive one:
+      \[ {-n \choose k} = (-1)^k { n + k - 1 \choose k} \]
+      \begin{solutionorbox}[2.5in]
+      \end{solutionorbox}
+      \part
+      Evauluate the previously derived formula for $P(X_n=k)$ with $n=6$ and
+      $k=15$ ``by hand'' to get the exact value.
+      \begin{solutionorbox}[5in]
+      \end{solutionorbox}
+    \end{parts}
+  \end{question}
+
+
+\end{questions}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-engine: default
+%%% End:
