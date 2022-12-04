@@ -1,0 +1,86 @@
+\documentclass[12pt]{gradescopeexam}
+% \documentclass[12pt,noanswers,solutionkey]{gradescopeexam}
+\noprintanswers
+%\printanswers
+% \printsolutionkey
+
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{datetime}
+\usepackage{hyperref}
+\usepackage{comment}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{units}
+\usepackage{MnSymbol}
+\usepackage{pgfplots}
+
+\renewcommand\P{\mathbb{P}}
+\newcommand\R{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\E{\mathbb{E}}
+\newcommand\N{\mathbb{N}}
+\newcommand\F{\mathbb{F}}
+\newcommand\one{\mathbbm{1}}
+\newcommand\V{\mathrm{var}}
+\newcommand\sgn{\mathrm{sgn}}
+\renewcommand\vec[1]{\mathbf{#1}}
+\renewcommand\c[1]{\mathcal{#1}}
+\newcommand\im[1]{\mathrm{Im}(#1)}
+
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{theorem}{Theorem}
+
+\begin{document}
+
+% ----------------------------------------------------------------
+\LeftBoxMargin{0.0\linewidth}
+\RightBoxMargin{0.0\linewidth}
+\AssignmentTitle{Week8-template}
+\CourseName{Math 563, Fall 2022}
+%\FirstName{Marek}
+%\LastName{Rychlik}
+%\StudentId{31415926}
+% ----------------------------------------------------------------
+\makeheader
+\vspace{0.1in}
+\begin{questions}
+  \begin{question}
+    Let $T_1,T_2,\ldots T_n$ be non-negative, independent continuous random variables and let
+    $$V = \min(T_1,T_2,\ldots,T_n)$$ be their minimum. Let $f_j(t)=f_{T_j}(t)$ be their pdf
+    and $F_j(t)$ be the corresponding cdf. Let $G_j=1-F_j$ be the tail probability.
+    Let $I$ be the index of the smallest of $T_i$, i.e.
+    $I = i$ iff $\forall j\neq i \,:\, T_i < T_j$
+    {\color{magenta}All answers must be expressed in terms of $f_j$ and $G_j$.}
+    \begin{parts}
+      \part Find the tail probability $\P(V>t)$.
+      \begin{solutionorbox}[2.5in]
+      \end{solutionorbox}
+      \part Find the probability function of $I$, i.e., $\P(I=i)$.
+      \begin{solutionorbox}[2.5in]
+      \end{solutionorbox}
+      \part Find $ \P(V > t | I = i) $. Explain your reasoning, paying attention to proper notation.
+      \begin{solutionorbox}[8in]
+      \end{solutionorbox}
+      \part Use the Bayes formula for conditional expectations to find $ \P(I=i | V = t)$.
+      Explain your reasoning, paying attention to proper notation.
+      \begin{solutionorbox}[7.8in]
+      \end{solutionorbox}
+    \end{parts}
+  \end{question}
+  \end{questions}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-engine: default
+%%% End:
