@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry} % Set all margins to 1 inch
+\usepackage{tcolorbox}
+\usepackage{lipsum} % For generating dummy text
+\usepackage{atbegshi} % To get the current page number
+\usepackage{refcount} % For referencing page numbers
+\usepackage{xcolor} % For box transparency
+
+\newlength{\mainboxheight}
+\newlength{\mainboxwidth}
+
+\setlength{\mainboxheight}{5cm} % Adjust as needed
+\setlength{\mainboxwidth}{0.8\textwidth} % Adjust as needed
+
+\newcounter{boxcounter}
+\newcounter{overflowcounter}
+
+\newtcolorbox{mybox}[1][]{colframe=black,
+  colback=white!50,
+  width=\mainboxwidth,
+  height=\mainboxheight,
+  valign=top,
+  nobeforeafter,
+  boxsep=4pt,
+  left=4pt,
+  right=4pt,
+  top=4pt,
+  bottom=4pt,
+  #1}
+
+\newtcolorbox{overflowboxstyle}[1][]{
+  colframe=red,
+  colback=yellow!50,
+  width=\mainboxwidth,
+  height=\mainboxheight,
+  valign=top,
+  nobeforeafter,
+  boxsep=4pt,
+  left=4pt,
+  right=4pt,
+  top=4pt,
+  bottom=4pt,
+  #1}
+
+\newcommand{\mainboxcontent}[2]{%
+  \stepcounter{boxcounter}
+  \noindent\begin{mybox}
+    \begin{minipage}[t][\dimexpr\mainboxheight-2\baselineskip\relax][t]{\dimexpr\mainboxwidth-8pt\relax}
+      #1
+      \vfill
+      \hspace*{\fill}\textbf{\large Continue to page \pageref{overflowstart\theboxcounter}}
+    \end{minipage}
+  \end{mybox}
+  \AtEndDocument{
+    \stepcounter{overflowcounter}
+    \newpage
+    \section*{Overflow Text from Box \theboxcounter}
+    \label{overflowstart\theboxcounter}
+    #2
+  }
+}
+
+\begin{document}
+
+% Main content boxes
+\mainboxcontent{\lipsum[1]}{\lipsum[2-3]}
+\vspace{\baselineskip}
+\mainboxcontent{\lipsum[1]}{\lipsum[2-3]}
+\vspace{\baselineskip}
+\mainboxcontent{\lipsum[1]}{\lipsum[2-3]}
+\vspace{\baselineskip}
+\mainboxcontent{\lipsum[1]}{\lipsum[2-3]}
+\vspace{\baselineskip}
+\mainboxcontent{\lipsum[1]}{\lipsum[2-3]}
+
+\end{document}
