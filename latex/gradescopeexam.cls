@@ -93,16 +93,34 @@
 {%
 }
 
-
+% Define the question environment
 \newenvironment{question}[1][]{%
   \addtocounter{numquestions}{1}%
   \ifnum\value{numquestions}>1 \pagebreak[4]\fi%
+  \def\temp{#1}\ifx\temp\empty
+    \let\question@points\relax
+  \else
+    \addtocounter{numpoints}{#1}
+    \def\question@points{(#1 \ifnum#1>1 points\else point\fi)}  
+  \fi
   \ifhmode\hfill\break\fi%
   \noindent\hbox to 0pt{\hss \textbf{Q~\thenumquestions.\enspace}\hskip1em}%
-}%
-{}
+  \question@points%
+}{%
+  \let\question@points\relax
+}
 
-\newenvironment{parts}{\setcounter{numquestionparts}{0}}{}
+% Define the parts environment
+\newenvironment{parts}{%
+  \ifx\question@points\relax
+    % Do nothing if question@points is not defined or is \relax
+  \else
+    \errmessage{gradescopeexam error: Question which sets the number of points cannot have parts}
+  \fi
+  \setcounter{numquestionparts}{0}%
+}{}
+
+% Redefine the \part command
 \renewcommand{\part}[1][]{%
   \addtocounter{numquestionparts}{1}%
   \def\temp{#1}\ifx\temp\empty
@@ -116,7 +134,6 @@
   \noindent\hbox to 0pt{\hss \textbf{Q~\thenumquestions.\thenumquestionparts.}\hskip1em}%
   \part@points%
 }
-
 
 \newcommand\SolutionEmphasis[1]{%
   \def\Solution@Emphasis{#1}%
