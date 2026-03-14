@@ -88,7 +88,8 @@ of the answer box: "The solution continued on page XX".
 Then the instructor can locate the continuation page reasonably
 fast and check the "overflow" work.
 
-The file [math589/Midterm1.pdf](./samples/math589/Midterm1.pdf)
+The file [math589/Midterm1Blank.pdf](./samples/math589/Midterm1Blank.pdf)
+($`\LaTeX`$ source: [math589/Midterm1Blank.tex](./samples/math589/Midterm1.tex))
 illustrates automatic insertion of extra "continuation pages"
 at the end of the template, if the instructor anticipates 
 that the students may run out of space in designated boxes.
