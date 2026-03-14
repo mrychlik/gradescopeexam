@@ -55,6 +55,7 @@ folder [samples/math468/Week9](./samples/math468/Week9).
 
 A note on "free format" vs. "template"
 ======================================
+
 The main advantage of using this software (class `gradescopeexam.cls')
 is as a "template". 
 
@@ -71,11 +72,14 @@ particular problems. This is the **lion part** of the benefit of
 using the `gradescopeexam` class.
 
 
-If the student adds a page (e.g., using Adobe Acrobat) in the middle of the temmplate,
-this action destroys the placement of the boxes and
-defeats the purpose of the template: the instructor will spend 
+Consequences of inserting extra pages
+=====================================
+
+If the student adds a page (e.g., using Adobe Acrobat) in the middle
+of the temmplate, this action destroys the placement of the boxes and
+defeats the purpose of the template: the instructor will spend
 significant amount of time dealing with this kind of submission
-because incorrect problems will be displayed by Gradescope, not 
+because incorrect problems will be displayed by Gradescope, not
 corresponding to the grading rubrics being displayed.
 
 Adding pages at the end of the paper
