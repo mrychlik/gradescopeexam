@@ -52,6 +52,47 @@ Then follow the examples provided ([samples](./samples "samples")
 folder).  A complete example of a real homework assignment is in the
 folder [samples/math468/Week9](./samples/math468/Week9).
 
+Automatic calculation of points
+===============================
+The instructor can assign the point score for the entire
+problem or for the individual parts (but not both).
+Here are two examples of setting up a problem:
+
+The problem with no parts looks like this:
+```latex
+\begin{question}[20]
+  Here goes the problem: Is two plus two four?
+  \begin{solutionorbox}[2in]
+    ...
+  \end{solutionorbox}
+\end{question}
+
+```
+
+The problem with parts looks like this: 
+```latex
+\begin{question}
+  A really complicated set of instructions to tie a shoe.
+  \begin{part}[10]
+    What do you do first?
+    \begin{longanswerorbox}[2in]
+      ...
+    \end{longanswerorbox}
+  \end{part}
+  \begin{part}[10]
+    What do you do next?
+    \begin{longanswerorbox}[2in]
+      ...
+    \end{longanswerorbox}
+  \end{part}
+\end{question}
+
+```
+The total number of points is available as the macro `\numpoints`.
+
+Note: After changing the number of points compile your $`\LaTeX`$ twice,
+as calculating the points requires two passes.
+
 
 A note on "free format" vs. "template"
 ======================================
