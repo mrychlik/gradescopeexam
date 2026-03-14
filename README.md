@@ -52,6 +52,47 @@ Then follow the examples provided ([samples](./samples "samples")
 folder).  A complete example of a real homework assignment is in the
 folder [samples/math468/Week9](./samples/math468/Week9).
 
+
+A note on "free format" vs. "template"
+======================================
+The main advantage of using this software (class `gradescopeexam.cls')
+is as a "template". 
+
+The student should be instructed to write the answer in the designated
+boxes (`solutionorbox`, `prooforbox` or `longanswerorbox`). Ideally,
+they download the "template" (blank exam or homework) and eacher
+handwrite the answer, or use annotation tools (e.g., Xournal++, free
+and available for all major platforms).
+
+The instructor then uses Gradescope to designate the boxes
+the areas that should be graded. This is **the most efficient** way
+to grade, as it eliminates the need to locate student answers to
+particular problems. This is the **lion part** of the benefit of 
+using the `gradescopeexam` class.
+
+
+If the student adds a page (e.g., using Adobe Acrobat) in the middle of the temmplate,
+this action destroys the placement of the boxes and
+defeats the purpose of the template: the instructor will spend 
+significant amount of time dealing with this kind of submission
+because incorrect problems will be displayed by Gradescope, not 
+corresponding to the grading rubrics being displayed.
+
+Adding pages at the end of the paper
+====================================
+This is is an **unofficial feature** of Gradescope: the student
+can add pages to the solution **at the end of the paper**.
+This maintains the template structure. The student 
+should be instructed to add a line at the bottom
+of the answer box: "The solution continued on page XX".
+Then the instructor can locate the continuation page reasonably
+fast and check the "overflow" work.
+
+The file [math589/Midterm1.pdf](./samples/math589/Midterm1.pdf)
+illustrates automatic insertion of extra "continuation pages"
+at the end of the template, if the instructor anticipates 
+that the students may run out of space in designated boxes.
+
 Enjoy,
 
 --Marek Rychlik
