@@ -73,18 +73,20 @@ The problem with parts looks like this:
 ```latex
 \begin{question}
   A really complicated set of instructions to tie a shoe.
-  \begin{part}[10]
-    What do you do first?
-    \begin{longanswerorbox}[2in]
-      ...
-    \end{longanswerorbox}
-  \end{part}
-  \begin{part}[10]
-    What do you do next?
-    \begin{longanswerorbox}[2in]
-      ...
-    \end{longanswerorbox}
-  \end{part}
+  \begin{parts}
+    \begin{part}[10]
+      What do you do first?
+      \begin{longanswerorbox}[2in]
+        ...
+      \end{longanswerorbox}
+    \end{part}
+    \begin{part}[10]
+      What do you do next?
+      \begin{longanswerorbox}[2in]
+        ...
+      \end{longanswerorbox}
+    \end{part}
+  \end{parts}
 \end{question}
 
 ```
