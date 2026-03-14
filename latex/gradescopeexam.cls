@@ -182,6 +182,22 @@
   }%
 }
 
+\newcommand{\makelonganswerbox}[3]{%
+  % \centering\fcolorbox{blue}{yellow}{\parbox[c][#1][c]{\dimexpr0.6\linewidth}{#2}}%
+  \centering%
+  \parbox[c][#1][c]{\dimexpr\linewidth}{%
+    \hbox to\linewidth{\color{red!70}{\tiny\sc Long Answer}\hfill}\par%
+    \vfill%
+    \hbox to \textwidth{
+      \hss
+      \begin{minipage}[b][1in][b]{#2}
+        #3%
+        \vfill%
+      \end{minipage}
+    }%
+  }%
+}
+
 
 
 \newif\if@answerless
@@ -312,6 +328,56 @@
     \pagebreak[3]
   }%
 % \newenvironment{solutionorbox}[1][]{\begin{mdframed}}{\end{mdframed}}
+
+\newenvironment{longanswerorbox}[1][]%
+{% 
+  \nopagebreak[3]
+  \ifprintanswers
+    \def\TheAnswer##1{%
+      {\sc The Answer:}
+      \begin{mdframed}[shadow=false,
+        backgroundcolor=yellow!10,
+        linecolor=blue,
+        linewidth=0.2pt,
+        ]%
+        ##1
+      \end{mdframed}%
+    }
+    \def\the@answer{\relax}
+    \begingroup
+    \Solution@Emphasis
+    \begin{TheProof}%
+  \else
+    \begin{mdframed}[shadow=true,
+      linecolor=blue,
+      linewidth=1pt,
+      shadowcolor=black!40,
+      leftmargin=\dimexpr\left@boxmargin\relax,
+        rightmargin=\dimexpr\right@boxmargin\relax,
+      ]%
+      \par
+      \penalty 0
+      \def\v@space{#1}
+      \@prooflesstrue
+      % \vspace*{#1}%
+      \setbox\z@\vbox\bgroup
+    \fi
+  }%
+  {%
+    \ifprintanswers
+      \end{TheProof}
+      \endgroup
+    \else
+      \egroup
+      \if@answerless
+        \def\the@answer{}
+      \fi
+      \makelonganswerbox{\v@space}{\dimexpr\answerbox@width}{\the@answer}%
+      \end{mdframed}
+    \fi
+    \pagebreak[3]
+  }%
+
 
 
 \newcommand{\solutiontitle}{\noindent\textbf{Solution:}\enspace}
