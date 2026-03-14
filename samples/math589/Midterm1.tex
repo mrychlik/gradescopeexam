@@ -1,0 +1,507 @@
+\documentclass[11pt,letterpaper]{gradescopeexam}
+%% NOTE: This file contains Python code which is evaluated
+%% by a program `pythontex`, like this:
+%%     shell% pythontex Midterm1
+%% This is only relevant if \printanswers is in effect
+\noprintanswers
+%\printanswers
+%\printsolutionkey
+
+\usepackage{mdframed}
+\usepackage[right,modulo]{lineno}
+\usepackage{pythontex}
+
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{amsthm}
+\usepackage{datetime}
+\usepackage{hyperref}
+\usepackage{comment}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{units}
+\usepackage{enumitem}
+% \usepackage{MnSymbol}
+\usepackage{pgfplots}
+\usepackage{hyperref}
+
+
+\renewcommand\P{\mathbb{P}}
+\newcommand\R{\mathbb{R}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\E{\mathbb{E}}
+\newcommand\N{\mathbb{N}}
+\newcommand\F{\mathbb{F}}
+\newcommand\one{\mathbbm{1}}
+\newcommand\V{\mathrm{var}}
+\newcommand\sgn{\mathrm{sgn}}
+\renewcommand\vec[1]{\mathbf{#1}}
+
+\renewcommand\c[1]{\mathcal{#1}}
+\newcommand\im[1]{\mathrm{Im}(#1)}
+\DeclareMathOperator\Cov{\mathrm{Cov}}
+
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{theorem}{Theorem}
+
+\usepackage{geometry}
+\usepackage{listings} % Include listings package
+
+% Setup the listings package for Python syntax highlighting
+\lstset{language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  commentstyle=\color{olive},
+  stringstyle=\color{red},
+  showstringspaces=false,
+  identifierstyle=\color{black}}
+
+% 
+% Define style for the Maxima language listings
+% 
+\lstdefinelanguage{Maxima}{
+  keywords={addrow,addcol,zeromatrix,ident,augcoefmatrix,ratsubst,diff,ev,tex,%
+    with_stdout,nouns,express,depends,load,submatrix,div,grad,curl,%
+    rootscontract,solve,part,assume,sqrt,integrate,abs,inf,exp},
+  morekeywords=[2]{for,while,if,then,thru,do,define,subst,ev,makelist,sum,nusum,int},  
+  morekeywords=[3]{plot2d,plot3d,wxplot2d,wxplot3d},
+  morekeywords=[4]{alpha,beta,gamma,delta,eta,lambda},
+  sensitive=true,
+  comment=[n][\itshape]{/*}{*/},
+  commentstyle=\color{olive},
+  literate=
+  *{+}{{{\color{purple}+}}}1
+  {-}{{{\color{purple}-}}}1
+  {:}{{{\color{purple}:}}}2
+  {:=}{{{\color{purple}:=}}}1
+  {*}{{{\color{purple}*}}}1
+  {^}{{{\color{purple}\^{}}}}1    
+}
+
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+
+\newcommand{\continuationbox}[0]{%
+  \newpage
+  \noindent%
+  \textbf{\sc Continuation of Problem:} \fbox{\vphantom{$\int$}\phantom{Q00.00}}
+  \begin{mdframed}[shadow=true,
+    linecolor=blue,
+    linewidth=1pt,
+    shadowcolor=black!40,
+    ]%
+    \vspace{0.9\textheight}
+  \end{mdframed}}
+
+
+\pgfplotsset{compat=1.18}
+
+\begin{document}
+
+% ----------------------------------------------------------------
+\LeftBoxMargin{0.0\linewidth}
+\RightBoxMargin{0.0\linewidth}
+\AssignmentTitle{Midterm 1 (Max.~score = \numpoints\ points)}
+\CourseName{Math 589B, Spring 2024}
+\ifprintanswers
+\FirstName{Marek}
+\LastName{Rychlik}
+\StudentId{31415926}
+\fi
+% ----------------------------------------------------------------
+\makeheader
+\vspace{0.1in}
+
+\begin{questions}
+  \begin{question}[10]
+    Given is the following Newton's divided difference table of the function \(f(x)\):
+    \[
+    \begin{array}{c|ccccc}
+      x_i & f[x_i] & f[x_i,x_{i+1}] & f[x_i,x_{i+1},x_{i+2}] 
+      & f[x_i,x_{i+1},x_{i+2},x_{i+3}] 
+      & f[x_i,x_{i+1},x_{i+2},x_{i+3},x_{i+4}] \\[6pt]
+      \hline
+      0      & 0       & 0.7956 & 0.1312 & 0.2379 & 0.1792 \\
+      0.25   & 0.1989  & 0.8612 & 0.3096 & 0.4171 &        \\
+      0.50   & 0.4142  & 1.016  & 0.6224 &        &        \\
+      0.75   & 0.6682  & 1.3272 &        &        &        \\
+      1.00   & 1       &        &        &        &        \\
+    \end{array}
+    \]
+    Use the 4th‑degree Newton polynomial constructed from the table to
+    approximate \( f(0.1) \).  Make sure to give the answer with the
+    correct number of significant digits, assuming that the values in
+    the table are correctly rounded to \(4\) significant digits, i.e.,
+    have relative error \(\le 0.5\times 10^{-4}\) (\(1/2\) ulp guarantee).
+\begin{pycode}
+I= 0 \
+   + 0.7956 * (0.1 - 0) \
+   + 0.1312 * (0.1 - 0) * (0.1-0.25) \
+   + 0.2379 * (0.1-0) * (0.1 - 0.25)  * (0.1 - 0.5) \
+   + 0.1792 * (0.1-0) * (0.1 - 0.25)  * (0.1 - 0.5) * (0.1 -0.75)
+n = 10
+def r(x):
+    return round(x,n)
+\end{pycode}
+ 
+    \begin{solutionorbox}[4in]
+      \[
+      \begin{aligned}
+        f(0.1) \approx \\
+        & f[0] \\
+        & + f[0,0.25]\,(0.1-0) \\
+        & + f[0,0.25,0.50]\,(0.1-0)\,(0.1-0.25) \\
+        & + f[0,0.25,0.50,0.75]\,(0.1-0)\,(0.1-0.25)\,(0.1-0.50) \\
+        & + f[0,0.25,0.50,0.75,1]\,(0.1-0)\,(0.1-0.25)\,(0.1-0.50)\,(0.1-0.75) \\
+        &= 0 
+          + \underbrace{0.7956\,(0.1)}_{\py{r(0.7956*0.1)}}
+          + \underbrace{0.1312\,(0.1)(-0.15)}{\py{r(0.1312*(0.1))}}
+          + \underbrace{0.2379\,(0.1)(-0.15)(-0.40)}_{\py{r(0.2379*(0.1)*(-0.15)*(-0.40))}} \\
+        & + \underbrace{0.1792\,(0.1)(-0.15)(-0.40)(-0.65)}_{\py{r(0.1792*(0.1)*(-0.15)*(-0.40)*(-0.65))}} \\
+        &= \py{I} \approx\py{round(I,5)}.
+      \end{aligned}
+      \]
+      The result of the computation is exact, but every divided
+      difference has 4 digits after the decimal point, and the
+      \(1/2\)-ulp guarantee assumes that all divided difference
+      approximations are within \(0.5\cdot 10^{-4}\) of the exact
+      values. Since the firs value in the table is multiplied by
+      \(0.1\), which is known exactly. Therefore
+      \(0.7956\cdot 0.1 = 0.07956 \) has \(6\) accurate digits, i.e.,
+      \(5\) accurate digits after the decimal point.
+
+      The other quantities in the sum have negligible impact
+      on accuracy of the sum because they are by at least an order of magnitude
+      smaller. Hence, we should round the answer to \(5\) digits
+      after the decimal point.
+
+      \TheAnswer{\(\py{round(I,5)}\), rounded to \textbf{five digits} after the decimal point}
+    \end{solutionorbox}
+  \end{question}    
+  
+  \begin{question}
+    In numerical integration, the Midpoint Rule (for a single
+    subinterval) approximates the definite integral of a function $f$
+    over $[a,b]$ by evaluating $f$ at the midpoint $m = \frac{a+b}{2}$:
+    \[
+    \int_a^b f(x)\,dx 
+    \;\approx\; 
+    (b - a)\, f\Bigl(\frac{a + b}{2}\Bigr).
+    \]
+
+    \begin{parts}
+      \part[10]
+      Write down (in your own words) the statement of the Midpoint Rule
+      for approximating an integral of a continuous function $f$ over
+      the interval $[a,b]$.
+      \begin{prooforbox}[5.7in]
+        The formula results from approximating the area by a rectangle
+        of height \(f(m)\) and base \((b-a)\). Drawing in the book.
+      \end{prooforbox}
+      \part[10]
+      Using ideas from how the error was derived for the Trapezoidal
+      Rule (which we discussed in class), derive an error expression of
+      the form
+      \[
+      \text{Error} 
+      \;=\; 
+      -\,\frac{(b-a)^3}{24}\,f''(\xi)
+      \]
+      for some $\xi \in (a,b)$.  (Hint: consider the second derivative
+      of $f$, apply an appropriate form of the Remainder Theorem or
+      Taylor expansion, and carefully compare the exact integral to the
+      midpoint approximation.)
+      \begin{solutionorbox}[5.5in]
+        We use Taylor expansion about the middle point \(m\):
+        \[ f(x) = f(m) + f'(m)(x-m) + \frac{f''(\xi_x)}{2}(x-m)^2. \]
+        Integrating over \(x\) over \([a,b]\) gives
+        \[
+        \begin{aligned}
+ \int f(x)\,dx &=
+          f(m)(b-a) + f'(m)\overbrace{\int_a^b(x-m)\,dx}^{0} + \int_a^b\frac{f''(\xi_x)}{2}(x-m)^2\,dx\\
+          &= f(m)(b-a) + \frac{f''(\xi)}{2} \int_a^b(x-m)^2\,dx.
+        \end{aligned}
+        \]
+        In the last step we applied the Mean Value Theorem for integrals.
+        Finally,
+        \[ 
+        \begin{aligned}
+          \int_a^b(x-m)^2\,dx
+          &= \frac{1}{3}(x-m)^3\bigg|_{x=a}^b\\
+          &= \frac{1}{3}\left((b-m)^3-(a-m)^3\right)\\
+          &= \frac{1}{3} \left(
+            \left(\frac{b-a}{2}\right)^3-
+            \left(\frac{a-b}{2}\right)^3
+            \right)\\
+          &= \frac{1}{3} \left(
+            \left(\frac{b-a}{2}\right)^3+
+            \left(\frac{b-a}{2}\right)^3
+            \right)\\
+          &= \frac{1}{3} \left(
+            \left(\frac{b-a}{2}\right)^3+
+            \left(\frac{b-a}{2}\right)^3
+            \right)\\
+          &= \frac{2}{3} \left(\frac{b-a}{2}\right)^3\\
+          &= \frac{1}{12} (b-a)^3.
+        \end{aligned}
+        \]
+        Combining with the previous, we obtain:
+
+        \TheAnswer{\(\text{Error} = \frac{f''(\xi)}{24}(b-a)^3\)}
+
+        NOTE: In particular, when \(f\) is convex, the error is
+        positive, which means that the Midpoint Rule underestimates
+        the integral (the opposite of the Trapezoid Rule).
+      \end{solutionorbox}
+      \part[10] 
+      Give a detailed proof that shows why there must exist such a
+      point $\xi$ in $(a,b)$ satisfying the error bound. (You may use
+      the Mean Value Theorem for integrals, Rolle s Theorem or other
+      standard theorems covered in class and/or calculus.)
+      \begin{prooforbox}[6.5in]
+        The standard ``proof'' is given in the derivation of the previous part.
+        However, the proof is known to have a gap, because \(\xi_x\)
+        may not depend continuously on \(x\).
+\begin{comment}
+        The correct proof results if we use the integral form of the remainder
+        in the Taylor series:
+        \[ f(x) = f(m) + f'(m)(x-m) + R_1(x) \]
+        where
+        \[ \begin{aligned}
+          R_1(x) &= \int_m^x\frac{f''(t)}{2!}(x-t)^2\,dt\\
+                 &=\frac{1}{2}\int_0^1 f''(m+u(x-m))(x-m-u(x-m))^2(x-m)\,du\\
+                 &=\frac{1}{2}(x-m) \int_0^1 f''(m+u(x-m))((1-u)(x-m))^2\,du\\
+                 &=\frac{1}{2}(x-m)^3 \int_0^1 f''(m+u(x-m))(1-u)^2\,du.
+        \end{aligned}
+        \]
+
+
+        Therefore, after integrating,
+        \[
+        \begin{aligned}
+          \text{Error}
+          &= \int_a^b R_1(x)\,dx\\
+          & = \int_a^b\left(\frac{1}{2}(x-m)^3 \int_0^1 f''(m+u(x-m))(1-u)^2\,du\right),dx\\
+          & = \frac{1}{2}\iint_{[a,b]\times[0,1]}(x-m)^3 f''(m+u(x-m))(1-u)^2\,du\,dx\\
+          & = \frac{1}{2}\int_0^1 f''(m+u(x-m))(1-u)^2(x-m)^3 \,dx\,du.\\
+        \end{aligned}
+        \]
+
+  \]
+  Where 
+  \[
+  \begin{aligned}
+    \int_m^b \frac{f''(t)}{2} \left(\int_t^b(x-t)^2\,dx\right)\,dt\\
+    &= \frac{f''(\xi)}{2} \int_m^b\int_t^b(x-t)^2\,dx\,dt.
+  \end{aligned}
+  \]
+  We find by exact calculation that
+  \[ \int_m^b\int_t^b(x-t)^2\,dx\,dt = \frac{(b-a)^3}{24}.\]
+\end{comment}
+        
+      \end{prooforbox}
+      % \part[10]
+      % Explain how this error formula depends on the interval length
+      % $(b-a)$ and on the curvature of $f$. Compare it to the error
+      % constant in the Trapezoidal Rule.
+      % \begin{prooforbox}[3in]
+      % \end{prooforbox}
+    \end{parts}
+  \end{question}
+
+  \begin{question}
+    Consider the Legendre polynomial of degree 3, $P_{3}(x)$. By
+    definition, Legendre polynomials can be obtained from the
+    \emph{Rodrigues formula}:
+    \[
+    P_{n}(x) \;=\; \frac{1}{2^{n}\,n!}\;\frac{d^{n}}{dx^{n}} \bigl[(x^{2}-1)^{n}\bigr].
+    \]
+    \begin{parts}
+      \part[10] Use the Rodrigues formula with $n=3$ to derive an explicit
+      expression for $P_{3}(x)$.
+      \begin{solutionorbox}[5.8in]
+        We start with the Rodrigues formula:
+        \[
+        P_{3}(x)
+        \;=\; \frac{1}{2^3\,3!}\,\frac{d^3}{dx^3}\Bigl[(x^2-1)^3\Bigr]
+        \;=\; \frac{1}{8\,6}\,\frac{d^3}{dx^3}\bigl[(x^2-1)^3\bigr].
+        \]
+        First, expand $(x^2-1)^3 = (x^2-1)^2\,(x^2-1) = (x^4 - 2x^2 + 1)\,(x^2 - 1)$. One may also expand directly:
+        \[
+        (x^2-1)^3 
+        \;=\; x^6 - 3x^4 + 3x^2 - 1.
+        \]
+        Then,
+        \[
+        \frac{d^3}{dx^3}\bigl(x^6 - 3x^4 + 3x^2 - 1\bigr)
+        \;=\;
+        \frac{d^3}{dx^3}\bigl(x^6\bigr)
+        \;-\;3\,\frac{d^3}{dx^3}\bigl(x^4\bigr)
+        \;+\;3\,\frac{d^3}{dx^3}\bigl(x^2\bigr)
+        \;-\;\frac{d^3}{dx^3}(1).
+        \]
+        Compute term by term:
+        \[
+        \frac{d^3}{dx^3}(x^6) = 6\cdot5\cdot4\,x^3 = 120\,x^3, 
+        \quad
+        \frac{d^3}{dx^3}(x^4) = 4\cdot3\cdot2\,x = 24\,x,
+        \]
+        \[
+        \frac{d^3}{dx^3}(x^2) = 2\cdot1\cdot0\, x^0 = 0,
+        \quad
+        \frac{d^3}{dx^3}(1)=0.
+        \]
+        Hence,
+        \[
+        \frac{d^3}{dx^3}\bigl[(x^2-1)^3\bigr]
+        =120\,x^3 \;-\;3\,(24\,x)
+        =120\,x^3 \;-\;72\,x
+        =24\,(5x^3 - 3x).
+        \]
+        Therefore,
+        \[
+        P_{3}(x)
+        \;=\;
+        \frac{1}{48}\;\bigl[\,24\,(5x^3 - 3x)\bigr]
+        \;=\;
+        \frac{5x^3 - 3x}{2}.
+        \]
+        \TheAnswer{
+          \[ P_3(x) = \frac{5x^3 - 3x}{2} \]
+        }
+
+      \end{solutionorbox}
+
+      \part[10] Find the roots of $P_{3}(x)$. These roots will be the
+      \emph{nodes} $x_{1} < x_{2} < x_{3}$ for the 3-point
+      Gauss--Legendre quadrature rule on the interval $[-1,1]$.
+      \begin{solutionorbox}[6.5in]
+        Set $P_{3}(x)=0$. Then
+        \[
+        \frac{5x^3 - 3x}{2} \;=\;0
+        \quad\Longrightarrow\quad
+        x\,(5x^2 - 3)\;=\;0.
+        \]
+        This gives the solutions
+        \[
+        x=0,
+        \quad
+        x = \pm\,\sqrt{\frac{3}{5}}.
+        \]
+        Thus, the three nodes are
+        \[
+        x_1 \;=\; -\,\sqrt{\frac{3}{5}}, 
+        \quad
+        x_2 \;=\; 0,
+        \quad
+        x_3 \;=\; \sqrt{\frac{3}{5}}.
+        \]
+      \end{solutionorbox}
+
+      \part[10] The standard formula for the \emph{weights} $w_{i}$ in
+      Gauss--Legendre quadrature is
+      \[
+      w_{i} 
+      \;=\; \frac{2}{\bigl(1 - x_{i}^{2}\bigr)\,\bigl[P_{n}'(x_{i})\bigr]^{2}},
+      \]
+      where $P_{n}'(x)$ is the derivative of the Legendre polynomial of degree $n$. 
+      Compute the weights $w_1, w_2, w_3$ for $n=3$, using the roots $x_i$ from part (b).
+      \begin{solutionorbox}[6in]
+      We use the formula
+      \[
+      w_i \;=\; \frac{2}{\bigl(1 - x_i^2\bigr)\,\bigl[P_{3}'(x_i)\bigr]^2}.
+      \]
+      First, differentiate $P_{3}(x)$:
+      \[
+      P_{3}'(x)
+      \;=\;
+      \frac{d}{dx}\Bigl(\tfrac{5x^3 - 3x}{2}\Bigr)
+      \;=\;
+      \frac{15x^2 - 3}{2}
+      \;=\;
+      \frac{3\bigl(5x^2 - 1\bigr)}{2}.
+      \]
+
+      \underline{\emph{Weight at $x_2=0$.}}
+      \[
+      P_{3}'(0) 
+      = \frac{3\bigl(5\cdot0^2 - 1\bigr)}{2}
+      = -\frac{3}{2}.
+      \]
+      Hence,
+      \[
+      w_2
+      = \frac{2}{\bigl(1 - 0^2\bigr)\,\bigl(-\tfrac{3}{2}\bigr)^2}
+      = \frac{2}{1 \cdot \tfrac{9}{4}}
+      = \frac{2}{\tfrac{9}{4}}
+      = \frac{8}{9}.
+      \]
+
+      \underline{\emph{Weights at $x_1=-\sqrt{\frac{3}{5}}$ and $x_3=\sqrt{\frac{3}{5}}$.}}
+
+      By symmetry, these weights are equal. Let $x_+ = \sqrt{\frac{3}{5}}$. Then
+      \[
+      1 - x_+^2
+      = 1 - \frac{3}{5}
+      = \frac{2}{5},
+      \quad
+      P_{3}'(x_+)
+      = \frac{3}{2}\,\bigl(5\cdot\tfrac{3}{5}-1\bigr)
+      = \frac{3}{2}\,(3-1)
+      = \frac{3}{2}\cdot 2
+      = 3.
+      \]
+      Thus
+      \[
+      \bigl[P_{3}'(x_+)\bigr]^2
+      = 9,
+      \quad
+      w_1 = w_3
+      = \frac{2}{\left(\tfrac{2}{5}\right)\,9}
+      = \frac{2}{\tfrac{18}{5}}
+      = \frac{2 \cdot 5}{18}
+      = \frac{5}{9}.
+      \]
+      \end{solutionorbox}
+      
+      \part[10] List your final answers for the \emph{nodes} and
+      \emph{weights} $\{(x_1,w_1),\,(x_2,w_2),\,(x_3,w_3)\}$ in
+      ascending order of the $x_i$. Hence, your completed 3-point
+      Gauss--Legendre rule will have the form
+      \[
+      \int_{-1}^{1} f(x)\,dx 
+      \;\approx\;
+      \sum_{i=1}^{3} w_i\,f\bigl(x_i\bigr).
+      \]
+      \begin{solutionorbox}[6in]
+    \TheAnswer{
+      \[
+      \begin{aligned}
+        &x_1 = -\sqrt{\tfrac{3}{5}},  &w_1 =\tfrac{5}{9},\\
+        &x_2 = 0, &w_2 = \tfrac{8}{9},\\
+        &x_3 = \sqrt{\tfrac{3}{5}}, &w_3 =\tfrac{5}{9}.
+      \end{aligned}
+      \]}
+    \end{solutionorbox}
+    \end{parts}
+  \end{question}
+
+
+  \ifprintanswers
+  \else
+    \continuationbox
+    \continuationbox
+  \fi
+
+
+
+
+\end{questions}
+\end{document}
