@@ -13,7 +13,10 @@ work the same.
 What is new?
 ============
 
-- The solution box for writing proofs (prooforbox) was added for advanced math exams.
+- The solution box for writing proofs (`prooforbox`) was added for advanced math exams.
+- The long answer box for for writing long answers (`longanswerorbox`) to accomodate
+  longer, self-contained answers. It is similar to `prooforbox`, but it does not
+  have the yellow `TheAnswer` area.
 
 Output modes
 ============
